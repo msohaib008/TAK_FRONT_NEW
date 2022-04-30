@@ -1,0 +1,100 @@
+<!-- Form Layout -->
+<div class="card">
+  <div class="card-body">
+    <h4 class="mb-32">Register Investor</h4>
+    <form [formGroup]="myForm" (ngSubmit)="myForm.valid && getUserData()">
+    
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input  matInput type="text"  formControlName="username" class="form-control" placeholder="Username" (keydown.space)="$event.preventDefault();"/>  
+      </mat-form-field>
+      <small *ngIf="myForm.controls['username'].errors">kindly provide the valid username</small> 
+
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input  matInput type="email"  formControlName="email" class="form-control" placeholder="Email"/>  
+      </mat-form-field>
+      <small *ngIf="myForm.controls['email'].errors">kindly provide the valid Email address</small> 
+
+
+
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input  matInput type="password"  formControlName="password" class="form-control" placeholder="password"/>
+    </mat-form-field>
+    <small *ngIf="myForm.controls['password'].errors">Password must contain 8 charecters with atleast 1 uppercase, lowercase, number and special charecter</small> 
+
+
+    <mat-form-field class="w-100 fs-16" appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <input  matInput type="text"  formControlName="phoneNumber" class="form-control" placeholder="Phone Number"/>  
+    </mat-form-field>
+    <small *ngIf="myForm.controls['phoneNumber'].errors">Phone number must contains just numerics</small> 
+
+
+
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Select Feild of interest</mat-label>
+          <mat-select formControlName="AreaToInvest"
+           class="form-control" placeholder="Select from tags or add new" multiple>
+            <mat-option #matOption value={{option.areaID}} *ngFor="let option of options" (click)="selectAreaOfInterest(matOption)">
+              {{option.areaDescription}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="demo-chip-list">
+        <mat-chip-list #chipList formControlName="chipList">
+          <mat-chip *ngIf="areaToInvest.length<1"
+        >
+        please select from above
+        </mat-chip>
+          <mat-chip *ngFor="let item of areaToInvest" [selectable]="selectable" [removable]="removable" (click)="changeSelected('s', item.areaDescription)"
+          (removed)="remove(item)" (click)="selectAreaOfExperience(item)" >
+          {{item.areaDescription}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+
+
+      <mat-form-field class="demo-chip-list">
+      <mat-label>Select the feild of Interest from tags please</mat-label>
+      <mat-chip-list #chipList2>
+        <mat-chip *ngIf="areaOfExperience.length<1"
+        >
+        please select from above
+        </mat-chip>
+        <mat-chip *ngFor="let item of areaOfExperience" [selectable]="selectable_2" [removable]="removable_2"
+        (removed)="removex(item)">
+        {{item.areaDescription}}
+        <mat-icon matChipRemove *ngIf="removable_2">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      </mat-form-field>
+
+
+
+
+
+
+      <mat-form-field class="w-100 fs-16" appearance="outline" matSuffix="$">
+        <mat-label>Budget</mat-label>
+        <input matInput type="number"  min="5" max="50" maxLength={6} formControlName="investor_BudgetToInvest" class="form-control" placeholder="Add Budget"/> 
+        <span matPrefix style="vertical-align: super;">$&nbsp;</span>
+    <!-- <span matSuffix>.00</span>  -->
+      </mat-form-field>
+      <small *ngIf="myForm.controls['investor_BudgetToInvest'].errors">Budget must be in numbers</small>
+      
+      <!-- <mat-form-field class="w-100 fs-16" appearance="outline"> -->
+        <!-- <mat-label>Budget</mat-label> -->
+        <!-- <input matInput type="text"  formControlName="Test" class="form-control" placeholder="Add Budget"/>   -->
+        <!-- <app-text-input [formControl]="$any(myForm.controls['Test'])" [label]='"Test"'></app-text-input> -->
+      <!-- </mat-form-field> -->
+      <!-- <small>Budget must be in numbers</small> -->
+  
+      <br><br>
+      <button mat-button class="btn btn-info fw-normal" type="submit" >Register</button>
+
+      </form>
+  </div>
+</div>

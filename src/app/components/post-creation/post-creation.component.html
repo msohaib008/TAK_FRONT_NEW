@@ -1,0 +1,55 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="mb-32">Create Post</h4>
+      <form [formGroup]="myForm" (ngSubmit)="myForm.valid && createPost()">
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Select Post Type</mat-label>
+          <mat-select formControlName="postType"
+           class="form-control" placeholder="Select from option">
+            <mat-option #matOption value={{option.postTypeID}} *ngFor="let option of options" (click)="selectPostType(matOption)">
+              {{option.postType}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">description</mat-icon>
+      Basic Information
+    </ng-template>
+    <mat-form-field class="w-100 fs-16 m-3" appearance="outline" style="margin-top: 8px!important;">
+        <mat-label>Post Title</mat-label>
+        <input  matInput type="text"  formControlName="postTitle" class="form-control" placeholder="Post Title" />  
+    </mat-form-field>
+    <small *ngIf="myForm.controls['postTitle'].errors">kindly provide the valid post title</small>
+
+    <mat-form-field class="w-100 fs-16 m-3" appearance="outline" style="margin-top: 5px;">
+        <mat-label>Post Description</mat-label>
+        <input  matInput type="text"  formControlName="postDescription" class="form-control" placeholder="Post Description" />  
+    </mat-form-field>
+
+    <br><br>
+    <button mat-button class="btn btn-info fw-normal" (click)="setTabTwo()" >Register</button>
+  </mat-tab>
+
+  <mat-tab [disabled]='secondTab'>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">upload</mat-icon>
+      Upload PDF
+    </ng-template>
+    
+    <!-- <input id="fileInput" name="file" type="file" class="ng-hide" multiple>
+    <button id="uploadButton" class="btn btn-info fw-normal"> Choose Files </button> -->
+
+    <ngx-file-drag-drop
+    [formControl]="fileControl"
+    activeBorderColor="#3F51B5"
+    (valueChanged)="onValueChange($event)"
+    [multiple]="true"
+  >
+  </ngx-file-drag-drop>
+  
+  </mat-tab>
+      </mat-tab-group>
+    </form>
+    </div>
+</div>

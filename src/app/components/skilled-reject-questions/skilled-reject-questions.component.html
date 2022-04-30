@@ -1,0 +1,42 @@
+<!-- Form Layout -->
+<div class="card">
+    <div class="card-body">
+      <h4 class="mb-32">Entrepreneur Answer</h4>
+      <form [formGroup]="myForm">
+     
+      
+          <mat-form-field class="w-100 fs-16" appearance="outline">
+            <mat-label>Describe your product</mat-label>
+            <input matInput type="text" formControlName="DescribeProduct" class="form-control" placeholder="Select from tags or add new"/>  
+          </mat-form-field>
+          
+
+          <br><br>
+
+
+          <!----------->
+          <mat-radio-group color="primary" class="fs-16" aria-label="Select an option">
+            <mat-label class="text-secondary">Have you studied the market</mat-label>
+            <mat-radio-button value="Yes" class="d-block mb-16">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="d-block mb-36">No</mat-radio-button>
+          </mat-radio-group>
+          
+
+          <!----------->
+
+          <mat-label>Attach any supporting documents/photos/videos</mat-label>
+          <br>
+          <button mat-button color="primary">Attach Documents</button>
+
+          <!----------->
+        <br><br>
+          <mat-label>Budget</mat-label>
+          <mat-form-field class="w-100 fs-16" appearance="outline">
+            <mat-label>How much is the budget?</mat-label>
+            <input matInput type="text" formControlName="Budget" class="form-control" placeholder="Select from tags or add new"/>  
+          </mat-form-field>
+        <br>
+        <button mat-button class="btn btn-info fw-normal" (click) = "getUserData()" [disabled]="!myForm.valid">Add Answer</button>
+      </form>
+    </div>
+  </div>

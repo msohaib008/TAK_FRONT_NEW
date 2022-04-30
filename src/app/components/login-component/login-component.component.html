@@ -1,0 +1,31 @@
+<!-- Form Layout -->
+<div class="card">
+  <div class="card-body">
+    <h4 class="mb-32">Login</h4>
+    <form [formGroup]="myForm">
+    
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input  matInput type="text"  formControlName="email" class="form-control" placeholder="Email"/>  
+      </mat-form-field>
+      <small>kindly provide the valid email address otherwise you cannot Login</small> 
+
+      <!-- <div ngIf="!myForm.email.valid">
+        <small>kindly provide the valid email address otherwise you cannot enter that</small> 
+      </div> -->
+     
+
+       
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+          <mat-label>password</mat-label>
+          <input  matInput type="password"  formControlName="password" class="form-control" placeholder="password"/>
+      </mat-form-field>
+      <small>Password must contain 8 charecters with atleast 1 uppercase, lowercase, number and special charecter</small> 
+
+<br>
+
+      <button mat-button class="btn btn-info fw-normal" (click) = "getUserData()" [disabled]="!myForm.valid">Login</button>
+
+      </form>
+  </div>
+</div>

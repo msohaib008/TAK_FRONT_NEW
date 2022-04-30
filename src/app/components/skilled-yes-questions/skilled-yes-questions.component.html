@@ -1,0 +1,69 @@
+<!-- Form Layout -->
+<div class="card">
+    <div class="card-body">
+      <h4 class="mb-32">Weldone! you made this so far</h4>
+      <form [formGroup]="myForm">
+     
+      
+          <mat-form-field class="w-100 fs-16" appearance="outline">
+            <mat-label>Select Feild of interest</mat-label>
+            <input (keyup.enter)="onBlurEvent($event)" matInput  type="text" formControlName="FeildOfInterest" class="form-control" autofocus placeholder="Select from tags or add new"/>  
+          </mat-form-field>
+          
+
+          <mat-form-field class="demo-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let item of areaToInvest" [selectable]="selectable" [removable]="removable"
+              (removed)="remove(item)">
+              {{item.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-form-field>
+
+          <br><br>
+
+
+          <!------------------------------------------>
+<div *ngFor="let feild of areaToInvest">
+
+          {{  this.addFormControllName( feild.name + "FormValue" )}}
+
+          <mat-form-field>
+            <input matInput placeholder="Skill" value="{{ feild.name }}" readonly> </mat-form-field>
+          <mat-form-field>
+            <input matInput (keyup.enter)="addData($event)" type="number" min="1" formControlName="{{ feild.name + 'FormValue' }}" placeholder="Year of experiece"> </mat-form-field>
+          <mat-action-row>
+          
+          </mat-action-row>
+          <br>
+</div>
+           <!------------------------------------------>
+          
+          
+          
+          
+          <!-- <br><br><br>
+          <mat-label>Attach your cridentials to showcase your achivements</mat-label>
+          <br>
+          <button type="file" mat-button color="primary">Attach Documents</button> -->
+
+          <!------------------------------------------->
+
+          <br><br><br>
+          <mat-label>Online protfolio links etc</mat-label>
+          <mat-form-field class="w-100 fs-16" appearance="outline">
+            <mat-label>Kindly paste the link of previous experiece</mat-label>
+            <input matInput type="text" formControlName="AttachLink" class="form-control" placeholder="Select from tags or add new"/>  
+          </mat-form-field>
+
+
+        <br>
+        <button mat-button class="btn btn-info fw-normal" (click) = "getUserData()" [disabled]="!myForm.valid">Add Answer</button>
+      </form>
+
+    </div>
+  </div>
+
+
+

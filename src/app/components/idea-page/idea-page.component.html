@@ -1,0 +1,32 @@
+<!-- Form Layout -->
+<div class="card">
+    <div class="card-body">
+      <h4 class="mb-32">New Idea By Enterpreneur</h4>
+      <form [formGroup]="myForm">
+      
+        <mat-form-field class="w-100 fs-16" appearance="outline">
+            <mat-label>Idea Header</mat-label>
+            <input  matInput type="text"  formControlName="ideaHead" class="form-control" placeholder="Email"/>  
+        </mat-form-field>
+        <small>kindly provide the Idea Header</small> 
+  
+        <!-- <div ngIf="!myForm.email.valid">
+          <small>kindly provide the valid email address otherwise you cannot enter that</small> 
+        </div> -->
+       
+  
+        <mat-form-field class="w-100 fs-16" appearance="outline">
+            <mat-label>Idea Body</mat-label>
+            <textarea matInput rows="6" formControlName="ideabody" placeholder="Write your message" value="Default Value"></textarea>
+          </mat-form-field>
+         
+      
+  
+  <br>
+  
+        <button mat-button class="btn btn-info fw-normal" (click) = "getUserData()" [disabled]="!myForm.valid">Add idea</button>
+  
+        </form>
+    </div>
+  </div>
+  
