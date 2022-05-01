@@ -18,11 +18,7 @@ export class FullComponent {
 
   search: boolean = false;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  isHandset$ = true;
 
   constructor(private breakpointObserver: BreakpointObserver) { }
 

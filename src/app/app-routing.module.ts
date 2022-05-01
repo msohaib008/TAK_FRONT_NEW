@@ -41,10 +41,10 @@ const routes: Routes = [
       {path:"register-entrepreneur", component:RegisterEnterprunureComponent},
       {path:"new-idea", component:IdeaPageComponent},
       {path:"register-skilled-person", component:RegisterSkilledPersonComponent},
-      {path:"post-creation", component:PostCreationComponent},
+      // {path:"post-creation", component:PostCreationComponent},
       {path:"Proceed", component:SkilledYesQuestionsComponent},
       {path:"InProcess", component:SkilledRejectQuestionsComponent},
-      {path:"register-investor", component:RegisterInvestorComponent},
+      // {path:"register-investor", component:RegisterInvestorComponent},
       {path:"login", component:LoginComponentComponent},
       {path:"home", component:DashboardComponent},
       {path:"alerts", component:AlertsComponent},
@@ -66,8 +66,13 @@ const routes: Routes = [
     ]
   },
 
-  {path:"", redirectTo:"/home", pathMatch:"full"},
-  {path:"**", redirectTo:"/home", pathMatch:"full"},
+  {path:"", redirectTo:"/login", pathMatch:"full"},
+  // {path:"**", redirectTo:"/home", pathMatch:"full"},
+  {path:"home", component:DashboardComponent, pathMatch:"full"},
+  {path:"login", component:LoginComponentComponent, pathMatch:'full'},
+  {path:"register-investor", component:RegisterInvestorComponent, pathMatch:'full'},
+  {path:"post-creation", component:PostCreationComponent, pathMatch:'full'},
+
 ];
 
 @NgModule({

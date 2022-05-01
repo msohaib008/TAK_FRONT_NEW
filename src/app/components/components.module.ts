@@ -35,6 +35,8 @@ import { PostCreationComponent } from './post-creation/post-creation.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxFileDragDropModule } from "ngx-file-drag-drop";
 
+import { NgxFileDropModule } from 'ngx-file-drop';
+
 
 
 @NgModule({
@@ -65,6 +67,8 @@ import { NgxFileDragDropModule } from "ngx-file-drag-drop";
     IdeaPageComponent,
     TextInputComponent,
     PostCreationComponent,
+    // NgxFileDropModule 
+
   ],
   imports: [
     CommonModule,
@@ -73,8 +77,9 @@ import { NgxFileDragDropModule } from "ngx-file-drag-drop";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FileUploadModule,
-    NgxFileDragDropModule
+    // FileUploadModule,
+    // NgxFileDragDropModule,
+    NgxFileDropModule 
   ],
   exports: [
     AlertsComponent,
@@ -91,8 +96,9 @@ import { NgxFileDragDropModule } from "ngx-file-drag-drop";
     SliderComponent,
     SlideToggleComponent,
     ButtonsComponent,
-    FileUploadModule,
-    NgxFileDragDropModule
+    // FileUploadModule,
+    // NgxFileDragDropModule,
+    NgxFileDropModule
   ]
 })
 export class ComponentsModule { }

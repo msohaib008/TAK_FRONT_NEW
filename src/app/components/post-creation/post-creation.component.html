@@ -28,7 +28,7 @@
     </mat-form-field>
 
     <br><br>
-    <button mat-button class="btn btn-info fw-normal" (click)="setTabTwo()" >Register</button>
+    <button mat-button class="btn btn-info fw-normal" (click)="setTabTwo()" >Next</button>
   </mat-tab>
 
   <mat-tab [disabled]='secondTab'>
@@ -37,16 +37,149 @@
       Upload PDF
     </ng-template>
     
-    <!-- <input id="fileInput" name="file" type="file" class="ng-hide" multiple>
-    <button id="uploadButton" class="btn btn-info fw-normal"> Choose Files </button> -->
+  <div class="center">
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Optional custom content that replaces the the entire default content.
+          <button type="button" (click)="openFileSelector()">Browse Files</button>
+        </ng-template>
+    </ngx-file-drop>
+    <div class="upload-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                </tr>
+            </thead>
+            <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i=index">
+                    <td><strong>{{ item.relativePath }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+  
+  </mat-tab>
 
-    <ngx-file-drag-drop
-    [formControl]="fileControl"
-    activeBorderColor="#3F51B5"
-    (valueChanged)="onValueChange($event)"
-    [multiple]="true"
-  >
-  </ngx-file-drag-drop>
+
+  <mat-tab [disabled]='thirdTab'>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">support</mat-icon>
+      Choose required support
+    </ng-template>
+    
+    <label id="example-radio-group-label">Your required support</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      formControlName="supportType"
+      >
+      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+        {{season}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div *ngIf="myForm.controls['supportType'].value == 'Funds'"> 
+      <mat-form-field class="w-100 fs-16" appearance="outline" matSuffix="$">
+      <mat-label>Budget</mat-label>
+      <input matInput type="number"  min="5" max="50" maxLength={6} formControlName="post_fund" class="form-control" placeholder="Required funds"/> 
+      <span matPrefix style="vertical-align: super;">$&nbsp;</span>
+    </mat-form-field>
+    <small *ngIf="myForm.controls['post_fund'].errors">Budget must be in numbers</small></div>
+
+
+    <div *ngIf="myForm.controls['supportType'].value == 'Skills'">
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Select Feild of interest</mat-label>
+          <mat-select formControlName="AreaToInvest"
+           class="form-control" placeholder="Select from tags or add new" multiple>
+            <mat-option #matOption value={{option.areaID}} *ngFor="let option of skillOptions" (click)="selectAreaOfInterest(matOption)">
+              {{option.areaDescription}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div *ngIf="myForm.controls['supportType'].value == 'Both'"> 
+      <mat-form-field class="w-100 fs-16" appearance="outline" matSuffix="$">
+        <mat-label>Budget</mat-label>
+        <input matInput type="number"  min="5" max="50" maxLength={6} formControlName="post_fund" class="form-control" placeholder="Required funds"/> 
+        <span matPrefix style="vertical-align: super;">$&nbsp;</span>
+      </mat-form-field>
+      <small *ngIf="myForm.controls['post_fund'].errors">Budget must be in numbers</small>
+
+      <mat-form-field class="w-100 fs-16" appearance="outline">
+        <mat-label>Select Feild of interest</mat-label>
+          <mat-select formControlName="AreaToInvest"
+           class="form-control" placeholder="Select from tags or add new" multiple>
+            <mat-option #matOption value={{option.areaID}} *ngFor="let option of skillOptions" (click)="selectAreaOfInterest(matOption)">
+              {{option.areaDescription}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+
+  </mat-tab>
+
+  <mat-tab [disabled]="myForm.controls['supportType'].value == '' ? true : false">
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">note_add</mat-icon>
+      Submit Post
+    </ng-template>
+    
+  <div class="center" style="margin: 20px;">
+    <section fxLayout="row wrap" fxLayoutAlign="center center">
+      <mat-card fxFlex="500px" fxFlex.xs="100%">
+          <mat-card-title>Details of the {{myForm.controls['postType'].value == 1 ? 'Idea' : 'Prototype' }}</mat-card-title>
+          <mat-card-content>
+            <div fxLayout="column wrap" fxLayoutGap="40px">
+              <div fxLayout="row wrap" fxFlex>
+                <div fxFlex><strong>Title:</strong></div>
+                <div fxFlex>{{myForm.controls['postTitle'].value}}</div>
+              </div>
+        
+              <div fxLayout="row wrap" fxFlex>
+                <div fxFlex><strong>Description:</strong></div>
+                <div fxFlex>{{myForm.controls['postDescription'].value}}</div>
+              </div>
+        
+              <div fxLayout="row wrap" fxFlex>
+                <div fxFlex><strong>File:</strong></div>
+                <div fxFlex class="beginner-color">{{newFile | json}}</div>
+              </div>
+
+              <div fxLayout="row wrap" fxFlex>
+                <div fxFlex><strong>Skills:</strong></div>
+                <div fxFlex class="beginner-color" *ngFor="let skill of areaToInvest">{{skill.areaDescription}}</div>
+              </div>
+
+              <div fxLayout="row wrap" fxFlex>
+                <div fxFlex><strong>Funds:</strong></div>
+                <div fxFlex class="beginner-color">{{myForm.controls['post_fund'].value}}$</div>
+              </div>
+
+              <br><br>
+              <button mat-button class="btn btn-info fw-normal" >Post</button>
+            </div>
+
+            
+
+            
+          </mat-card-content>
+          <mat-card-actions>
+            <!-- <mat-form-field>
+              <mat-select placeholder="Show accounts" (selectionChange)="onChange($event)">
+                <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
+                  {{opt.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+    
+          </mat-card-actions>
+        </mat-card>
+  </section>
+</div>
   
   </mat-tab>
       </mat-tab-group>

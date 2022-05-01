@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
 
   <!-- Sidebar -->
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="isHandset$  ? 'dialog' : 'navigation'"
+    [mode]="isHandset$  ? 'over' : 'side'" [opened]="isHandset$ === false">
 
     <div class="p-16">
       <div class="mb-16">
@@ -51,7 +51,7 @@
     <!-- Header -->
     <mat-toolbar class="header ps-24 pe-24">
       <button type="button" class="ms-4" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$">
         <i-feather name="menu" class="text-light-muted feather-base mt-n3"></i-feather>
       </button>
       <button mat-icon-button class="ms-4 me-4" (click)="search=!search">

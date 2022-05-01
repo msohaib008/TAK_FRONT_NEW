@@ -15,6 +15,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ComponentsModule } from './components/components.module';
 import { SkilledNoQuestionsComponent } from './skilled-no-questions/skilled-no-questions.component';
 
+
+// import { NgxFileDropModule } from 'ngx-file-drop';
+
+
 @NgModule({
   declarations: [
     AppComponent,
